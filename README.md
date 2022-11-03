@@ -1,1 +1,0 @@
-# proskomma-usfm-graphql
