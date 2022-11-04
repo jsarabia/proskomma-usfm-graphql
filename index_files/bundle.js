@@ -189,9 +189,6 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
   copyToClipboard() {
     const copyText = this.state.result;
     navigator.clipboard.writeText(copyText);
-
-    // Alert the copied text
-    alert("Copied to clipboard");
   }
   render() {
     return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
@@ -201,16 +198,16 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
           children: "USFM GraphQL tool"
         }, void 0, false, {
           fileName: _jsxFileName,
-          lineNumber: 79,
+          lineNumber: 76,
           columnNumber: 21
         }, this)
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 78,
+        lineNumber: 75,
         columnNumber: 17
       }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("hr", {}, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 81,
+        lineNumber: 78,
         columnNumber: 17
       }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
         className: "main-body",
@@ -219,7 +216,7 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
           children: "Upload .usfm file: "
         }, void 0, false, {
           fileName: _jsxFileName,
-          lineNumber: 83,
+          lineNumber: 80,
           columnNumber: 21
         }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("input", {
           type: "file",
@@ -227,7 +224,7 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
           onChange: e => this.fileInput(e)
         }, void 0, false, {
           fileName: _jsxFileName,
-          lineNumber: 84,
+          lineNumber: 81,
           columnNumber: 21
         }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
           className: "split-container",
@@ -237,23 +234,23 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
               children: "Query: "
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 87,
+              lineNumber: 84,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("sup", {
               children: "(tab indent supported)"
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 88,
+              lineNumber: 85,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("textarea", {
               className: "query-input"
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 89,
+              lineNumber: 86,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("br", {}, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 90,
+              lineNumber: 87,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("button", {
               className: "submit-button",
@@ -261,36 +258,63 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
               children: "Execute (Ctrl + Enter)"
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 91,
+              lineNumber: 88,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("br", {}, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 94,
+              lineNumber: 91,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("h4", {
               children: "Files loaded:"
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 95,
+              lineNumber: 92,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("pre", {
               className: "files-loaded",
               children: this.state.files
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 96,
+              lineNumber: 93,
+              columnNumber: 29
+            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
+              className: "footer",
+              children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("sup", {
+                children: ["See documentations at: ", /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("a", {
+                  href: "https://doc.proskomma.bible/en/latest/getting_started/tutorials/hello.html#querying-scripture",
+                  children: "read the doc"
+                }, void 0, false, {
+                  fileName: _jsxFileName,
+                  lineNumber: 96,
+                  columnNumber: 60
+                }, this), " and ", /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("a", {
+                  href: "https://doc.proskomma.bible/en/latest/_static/schema/document.doc.html",
+                  children: "GraphQL Schema for usfm"
+                }, void 0, false, {
+                  fileName: _jsxFileName,
+                  lineNumber: 98,
+                  columnNumber: 46
+                }, this)]
+              }, void 0, true, {
+                fileName: _jsxFileName,
+                lineNumber: 95,
+                columnNumber: 33
+              }, this)
+            }, void 0, false, {
+              fileName: _jsxFileName,
+              lineNumber: 94,
               columnNumber: 29
             }, this)]
           }, void 0, true, {
             fileName: _jsxFileName,
-            lineNumber: 86,
+            lineNumber: 83,
             columnNumber: 25
           }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("pre", {
             id: "output",
             children: this.state.result
           }, void 0, false, {
             fileName: _jsxFileName,
-            lineNumber: 98,
+            lineNumber: 104,
             columnNumber: 25
           }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("button", {
             className: "copy-clipboard-btn",
@@ -298,22 +322,22 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
             children: "Copy"
           }, void 0, false, {
             fileName: _jsxFileName,
-            lineNumber: 99,
+            lineNumber: 105,
             columnNumber: 25
           }, this)]
         }, void 0, true, {
           fileName: _jsxFileName,
-          lineNumber: 85,
+          lineNumber: 82,
           columnNumber: 21
         }, this)]
       }, void 0, true, {
         fileName: _jsxFileName,
-        lineNumber: 82,
+        lineNumber: 79,
         columnNumber: 17
       }, this)]
     }, void 0, true, {
       fileName: _jsxFileName,
-      lineNumber: 77,
+      lineNumber: 74,
       columnNumber: 13
     }, this);
   }
@@ -72406,7 +72430,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".App {\n  text-align: center;\n}\n\n.App-logo {\n  height: 40vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .App-logo {\n    animation: App-logo-spin infinite 20s linear;\n  }\n}\n\n.App-header {\n  background-color: #282c34;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.App-link {\n  color: #61dafb;\n}\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.top-pane {\n  padding: 0 1.5em;\n}\n\n.main-body {\n  padding: 1.5em;\n}\n\n.split-container {\n  display: flex;\n  gap: 3em;\n}\n\n.input {\n  flex: 3 1;\n  min-width: 200px;\n}\n\n.query-input {\n  width: 100%;\n  height: 300px;\n  font-size: large;\n  padding: 0.5rem;\n}\n\n.submit-button {\n  background-color: #FAFBFC;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  border-radius: 6px;\n  box-shadow: rgb(27 31 35 / 4%) 0 1px 0, rgb(255 255 255 / 25%) 0 1px 0 inset;\n  box-sizing: border-box;\n  color: #24292E;\n  cursor: pointer;\n  display: inline-block;\n  font-family: -apple-system, system-ui, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\";\n  font-size: 15px;\n  padding: 0.5em;\n  width: 100%;\n}\n\n#output {\n  flex: 5 1;\n  padding: 1.5rem;\n  margin: 0;\n  color: #2a2a2a;\n  font-size: 14px;\n  font-family: 'consolas';\n  background-color: lightgray;\n  border-radius: 8px;\n  white-space: break-spaces;\n}\n\n.files-loaded {\n  min-height: 30px;\n  border-radius: 6px;\n  background: #edf6ff;\n  font-family: consolas;\n  padding: 0 0 1em 1em;\n  white-space: break-spaces;\n}\n\n.copy-clipboard-btn {\n  position: fixed;\n  right: 50px;\n  top: 140px;\n  background: #9d9cc170;\n  color: #2a34a7c7;\n  border: 1px solid #5c5858ab;\n  padding: 0.5em 1em;\n  cursor: pointer;\n  border-radius: 4px;\n}\n\n.copy-clipboard-btn:hover {\n  background-color: #7cbbfb70;\n}", "",{"version":3,"sources":["webpack://./src/App.css"],"names":[],"mappings":"AAAA;EACE,kBAAkB;AACpB;;AAEA;EACE,cAAc;EACd,oBAAoB;AACtB;;AAEA;EACE;IACE,4CAA4C;EAC9C;AACF;;AAEA;EACE,yBAAyB;EACzB,iBAAiB;EACjB,aAAa;EACb,sBAAsB;EACtB,mBAAmB;EACnB,uBAAuB;EACvB,6BAA6B;EAC7B,YAAY;AACd;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE;IACE,uBAAuB;EACzB;;EAEA;IACE,yBAAyB;EAC3B;AACF;;AAEA;EACE,gBAAgB;AAClB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,QAAQ;AACV;;AAEA;EACE,SAAO;EACP,gBAAgB;AAClB;;AAEA;EACE,WAAW;EACX,aAAa;EACb,gBAAgB;EAChB,eAAe;AACjB;;AAEA;EACE,yBAAyB;EACzB,wCAAwC;EACxC,kBAAkB;EAClB,4EAA4E;EAC5E,sBAAsB;EACtB,cAAc;EACd,eAAe;EACf,qBAAqB;EACrB,sHAAsH;EACtH,eAAe;EACf,cAAc;EACd,WAAW;AACb;;AAEA;EACE,SAAO;EACP,eAAe;EACf,SAAS;EACT,cAAc;EACd,eAAe;EACf,uBAAuB;EACvB,2BAA2B;EAC3B,kBAAkB;EAClB,yBAAyB;AAC3B;;AAEA;EACE,gBAAgB;EAChB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,oBAAoB;EACpB,yBAAyB;AAC3B;;AAEA;EACE,eAAe;EACf,WAAW;EACX,UAAU;EACV,qBAAqB;EACrB,gBAAgB;EAChB,2BAA2B;EAC3B,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,2BAA2B;AAC7B","sourcesContent":[".App {\n  text-align: center;\n}\n\n.App-logo {\n  height: 40vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .App-logo {\n    animation: App-logo-spin infinite 20s linear;\n  }\n}\n\n.App-header {\n  background-color: #282c34;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.App-link {\n  color: #61dafb;\n}\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.top-pane {\n  padding: 0 1.5em;\n}\n\n.main-body {\n  padding: 1.5em;\n}\n\n.split-container {\n  display: flex;\n  gap: 3em;\n}\n\n.input {\n  flex: 3;\n  min-width: 200px;\n}\n\n.query-input {\n  width: 100%;\n  height: 300px;\n  font-size: large;\n  padding: 0.5rem;\n}\n\n.submit-button {\n  background-color: #FAFBFC;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  border-radius: 6px;\n  box-shadow: rgb(27 31 35 / 4%) 0 1px 0, rgb(255 255 255 / 25%) 0 1px 0 inset;\n  box-sizing: border-box;\n  color: #24292E;\n  cursor: pointer;\n  display: inline-block;\n  font-family: -apple-system, system-ui, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\";\n  font-size: 15px;\n  padding: 0.5em;\n  width: 100%;\n}\n\n#output {\n  flex: 5;\n  padding: 1.5rem;\n  margin: 0;\n  color: #2a2a2a;\n  font-size: 14px;\n  font-family: 'consolas';\n  background-color: lightgray;\n  border-radius: 8px;\n  white-space: break-spaces;\n}\n\n.files-loaded {\n  min-height: 30px;\n  border-radius: 6px;\n  background: #edf6ff;\n  font-family: consolas;\n  padding: 0 0 1em 1em;\n  white-space: break-spaces;\n}\n\n.copy-clipboard-btn {\n  position: fixed;\n  right: 50px;\n  top: 140px;\n  background: #9d9cc170;\n  color: #2a34a7c7;\n  border: 1px solid #5c5858ab;\n  padding: 0.5em 1em;\n  cursor: pointer;\n  border-radius: 4px;\n}\n\n.copy-clipboard-btn:hover {\n  background-color: #7cbbfb70;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".App {\n  text-align: center;\n}\n\n.App-logo {\n  height: 40vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .App-logo {\n    animation: App-logo-spin infinite 20s linear;\n  }\n}\n\n.App-header {\n  background-color: #282c34;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.App-link {\n  color: #61dafb;\n}\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.top-pane {\n  padding: 0 1.5em;\n}\n\n.main-body {\n  padding: 1.5em;\n}\n\n.split-container {\n  display: flex;\n  gap: 3em;\n}\n\n.input {\n  flex: 3 1;\n  min-width: 200px;\n}\n\n.query-input {\n  width: 100%;\n  height: 300px;\n  font-size: large;\n  padding: 0.5rem;\n}\n\n.submit-button {\n  background-color: #FAFBFC;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  border-radius: 6px;\n  box-shadow: rgb(27 31 35 / 4%) 0 1px 0, rgb(255 255 255 / 25%) 0 1px 0 inset;\n  box-sizing: border-box;\n  color: #24292E;\n  cursor: pointer;\n  display: inline-block;\n  font-family: -apple-system, system-ui, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\";\n  font-size: 15px;\n  padding: 0.5em;\n  width: 100%;\n}\n\n#output {\n  flex: 5 1;\n  padding: 2em 1.5rem;\n  margin: 0;\n  color: #2a2a2a;\n  font-size: 14px;\n  font-family: 'consolas';\n  background-color: lightgray;\n  border-radius: 8px;\n  white-space: break-spaces;\n}\n\n.files-loaded {\n  min-height: 30px;\n  border-radius: 6px;\n  background: #edf6ff;\n  font-family: consolas;\n  padding: 0 0 1em 1em;\n  white-space: break-spaces;\n}\n\n.copy-clipboard-btn {\n  position: absolute;\n  right: 40px;\n  top: 130px;\n  background: #9d9cc170;\n  color: #2a34a7c7;\n  border: 1px solid #5c5858ab;\n  padding: 0.5em 1em;\n  cursor: pointer;\n  border-radius: 4px;\n}\n\n.copy-clipboard-btn:hover {\n  background-color: #7cbbfb70;\n}\n\n.footer {\n  margin-top: 3em;\n}", "",{"version":3,"sources":["webpack://./src/App.css"],"names":[],"mappings":"AAAA;EACE,kBAAkB;AACpB;;AAEA;EACE,cAAc;EACd,oBAAoB;AACtB;;AAEA;EACE;IACE,4CAA4C;EAC9C;AACF;;AAEA;EACE,yBAAyB;EACzB,iBAAiB;EACjB,aAAa;EACb,sBAAsB;EACtB,mBAAmB;EACnB,uBAAuB;EACvB,6BAA6B;EAC7B,YAAY;AACd;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE;IACE,uBAAuB;EACzB;;EAEA;IACE,yBAAyB;EAC3B;AACF;;AAEA;EACE,gBAAgB;AAClB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,QAAQ;AACV;;AAEA;EACE,SAAO;EACP,gBAAgB;AAClB;;AAEA;EACE,WAAW;EACX,aAAa;EACb,gBAAgB;EAChB,eAAe;AACjB;;AAEA;EACE,yBAAyB;EACzB,wCAAwC;EACxC,kBAAkB;EAClB,4EAA4E;EAC5E,sBAAsB;EACtB,cAAc;EACd,eAAe;EACf,qBAAqB;EACrB,sHAAsH;EACtH,eAAe;EACf,cAAc;EACd,WAAW;AACb;;AAEA;EACE,SAAO;EACP,mBAAmB;EACnB,SAAS;EACT,cAAc;EACd,eAAe;EACf,uBAAuB;EACvB,2BAA2B;EAC3B,kBAAkB;EAClB,yBAAyB;AAC3B;;AAEA;EACE,gBAAgB;EAChB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,oBAAoB;EACpB,yBAAyB;AAC3B;;AAEA;EACE,kBAAkB;EAClB,WAAW;EACX,UAAU;EACV,qBAAqB;EACrB,gBAAgB;EAChB,2BAA2B;EAC3B,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,2BAA2B;AAC7B;;AAEA;EACE,eAAe;AACjB","sourcesContent":[".App {\n  text-align: center;\n}\n\n.App-logo {\n  height: 40vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .App-logo {\n    animation: App-logo-spin infinite 20s linear;\n  }\n}\n\n.App-header {\n  background-color: #282c34;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.App-link {\n  color: #61dafb;\n}\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.top-pane {\n  padding: 0 1.5em;\n}\n\n.main-body {\n  padding: 1.5em;\n}\n\n.split-container {\n  display: flex;\n  gap: 3em;\n}\n\n.input {\n  flex: 3;\n  min-width: 200px;\n}\n\n.query-input {\n  width: 100%;\n  height: 300px;\n  font-size: large;\n  padding: 0.5rem;\n}\n\n.submit-button {\n  background-color: #FAFBFC;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  border-radius: 6px;\n  box-shadow: rgb(27 31 35 / 4%) 0 1px 0, rgb(255 255 255 / 25%) 0 1px 0 inset;\n  box-sizing: border-box;\n  color: #24292E;\n  cursor: pointer;\n  display: inline-block;\n  font-family: -apple-system, system-ui, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\";\n  font-size: 15px;\n  padding: 0.5em;\n  width: 100%;\n}\n\n#output {\n  flex: 5;\n  padding: 2em 1.5rem;\n  margin: 0;\n  color: #2a2a2a;\n  font-size: 14px;\n  font-family: 'consolas';\n  background-color: lightgray;\n  border-radius: 8px;\n  white-space: break-spaces;\n}\n\n.files-loaded {\n  min-height: 30px;\n  border-radius: 6px;\n  background: #edf6ff;\n  font-family: consolas;\n  padding: 0 0 1em 1em;\n  white-space: break-spaces;\n}\n\n.copy-clipboard-btn {\n  position: absolute;\n  right: 40px;\n  top: 130px;\n  background: #9d9cc170;\n  color: #2a34a7c7;\n  border: 1px solid #5c5858ab;\n  padding: 0.5em 1em;\n  cursor: pointer;\n  border-radius: 4px;\n}\n\n.copy-clipboard-btn:hover {\n  background-color: #7cbbfb70;\n}\n\n.footer {\n  margin-top: 3em;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
@@ -73162,7 +73186,7 @@ module.exports = function availableTypedArrays() {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("89b050f92585cb0890c1")
+/******/ 		__webpack_require__.h = () => ("9f95520bd6ea0b9de5c0")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
