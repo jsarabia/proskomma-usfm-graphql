@@ -141,6 +141,7 @@ var _jsxFileName = "D:\\Projects\\proskomma\\plain-react\\src\\comps\\Playground
 
 
 const pk = new proskomma__WEBPACK_IMPORTED_MODULE_1__.Proskomma();
+const sTagRegex = /\\s5\s/g;
 class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
   constructor(props) {
     super(props);
@@ -167,7 +168,8 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
     console.log(fileList);
     let fileNames = this.state.files;
     fileReader.onload = function () {
-      const usfm = fileReader.result;
+      const usfm = fileReader.result.replaceAll(sTagRegex, ''); // remove \s5 tags
+      console.log(usfm);
       myThis.setState({
         result: usfm
       });
@@ -190,6 +192,22 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
     const copyText = this.state.result;
     navigator.clipboard.writeText(copyText);
   }
+  keyDown(e) {
+    if (e.key == 'Tab') {
+      e.preventDefault();
+      const dom = e.target;
+      var start = dom.selectionStart;
+      var end = dom.selectionEnd;
+      const space = "  ";
+      dom.value = dom.value.substring(0, start) + space + dom.value.substring(end);
+
+      // put caret at right position again
+      dom.selectionStart = dom.selectionEnd = start + space.length;
+    }
+    if (e.key == 'Enter' && e.ctrlKey) {
+      this.submit();
+    }
+  }
   render() {
     return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
       children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
@@ -198,16 +216,16 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
           children: "USFM GraphQL tool"
         }, void 0, false, {
           fileName: _jsxFileName,
-          lineNumber: 76,
+          lineNumber: 99,
           columnNumber: 21
         }, this)
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 75,
+        lineNumber: 98,
         columnNumber: 17
       }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("hr", {}, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 78,
+        lineNumber: 101,
         columnNumber: 17
       }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
         className: "main-body",
@@ -216,7 +234,7 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
           children: "Upload .usfm file: "
         }, void 0, false, {
           fileName: _jsxFileName,
-          lineNumber: 80,
+          lineNumber: 103,
           columnNumber: 21
         }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("input", {
           type: "file",
@@ -224,7 +242,7 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
           onChange: e => this.fileInput(e)
         }, void 0, false, {
           fileName: _jsxFileName,
-          lineNumber: 81,
+          lineNumber: 104,
           columnNumber: 21
         }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
           className: "split-container",
@@ -234,23 +252,24 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
               children: "Query: "
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 84,
+              lineNumber: 107,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("sup", {
               children: "(tab indent supported)"
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 85,
+              lineNumber: 108,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("textarea", {
-              className: "query-input"
+              className: "query-input",
+              onKeyDown: e => this.keyDown(e)
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 86,
+              lineNumber: 109,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("br", {}, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 87,
+              lineNumber: 110,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("button", {
               className: "submit-button",
@@ -258,24 +277,24 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
               children: "Execute (Ctrl + Enter)"
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 88,
+              lineNumber: 111,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("br", {}, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 91,
+              lineNumber: 114,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("h4", {
               children: "Files loaded:"
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 92,
+              lineNumber: 115,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("pre", {
               className: "files-loaded",
               children: this.state.files
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 93,
+              lineNumber: 116,
               columnNumber: 29
             }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
               className: "footer",
@@ -285,36 +304,36 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
                   children: "read the doc"
                 }, void 0, false, {
                   fileName: _jsxFileName,
-                  lineNumber: 96,
+                  lineNumber: 119,
                   columnNumber: 60
                 }, this), " and ", /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("a", {
                   href: "https://doc.proskomma.bible/en/latest/_static/schema/document.doc.html",
                   children: "GraphQL Schema for usfm"
                 }, void 0, false, {
                   fileName: _jsxFileName,
-                  lineNumber: 98,
+                  lineNumber: 121,
                   columnNumber: 46
                 }, this)]
               }, void 0, true, {
                 fileName: _jsxFileName,
-                lineNumber: 95,
+                lineNumber: 118,
                 columnNumber: 33
               }, this)
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 94,
+              lineNumber: 117,
               columnNumber: 29
             }, this)]
           }, void 0, true, {
             fileName: _jsxFileName,
-            lineNumber: 83,
+            lineNumber: 106,
             columnNumber: 25
           }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("pre", {
             id: "output",
             children: this.state.result
           }, void 0, false, {
             fileName: _jsxFileName,
-            lineNumber: 104,
+            lineNumber: 127,
             columnNumber: 25
           }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("button", {
             className: "copy-clipboard-btn",
@@ -322,22 +341,22 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
             children: "Copy"
           }, void 0, false, {
             fileName: _jsxFileName,
-            lineNumber: 105,
+            lineNumber: 128,
             columnNumber: 25
           }, this)]
         }, void 0, true, {
           fileName: _jsxFileName,
-          lineNumber: 82,
+          lineNumber: 105,
           columnNumber: 21
         }, this)]
       }, void 0, true, {
         fileName: _jsxFileName,
-        lineNumber: 79,
+        lineNumber: 102,
         columnNumber: 17
       }, this)]
     }, void 0, true, {
       fileName: _jsxFileName,
-      lineNumber: 74,
+      lineNumber: 97,
       columnNumber: 13
     }, this);
   }
@@ -73186,7 +73205,7 @@ module.exports = function availableTypedArrays() {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("9f95520bd6ea0b9de5c0")
+/******/ 		__webpack_require__.h = () => ("16aa0985c2b635005eab")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
