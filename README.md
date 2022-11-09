@@ -156,5 +156,6 @@ Get all documents' content with chapters & verses
 }
 ```
 ### Sources & References
-GraphQL schema references available [here](https://doc.proskomma.bible/en/latest/_static/schema/document.doc.html)
+GraphQL schema references available [here](https://doc.proskomma.bible/en/latest/_static/schema/document.doc.html).
+
 Built with [proskomma-js](https://github.com/mvahowe/proskomma-js)
