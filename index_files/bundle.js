@@ -132,11 +132,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var proskomma__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! proskomma */ "./node_modules/proskomma/dist/index.js");
 /* harmony import */ var proskomma__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(proskomma__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-dev-runtime */ "./node_modules/react/jsx-dev-runtime.js");
+/* harmony import */ var proskomma_render_pdf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! proskomma-render-pdf */ "./node_modules/proskomma-render-pdf/index.js");
+/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-dev-runtime */ "./node_modules/react/jsx-dev-runtime.js");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
 var _jsxFileName = "D:\\Projects\\proskomma\\plain-react\\src\\comps\\Playground.js";
+
 
 
 
@@ -148,7 +150,6 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
     this.queryPk = async function (query) {
       const result = await pk.gqlQuery(query);
       const data = JSON.stringify(result, null, 2);
-      console.log(data);
       return data;
     };
     this.state = {
@@ -158,8 +159,7 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
   }
   setupPoskomma(data) {
     const mutationQuery = `mutation { addDocument(` + `selectors: [{key: "lang", value: "eng"}, {key: "abbr", value: "ust"}], ` + `contentType: "usfm", ` + `content: """${data}""") }`;
-    this.queryPk(mutationQuery).then(result => console.log(result + '\n\n'));
-    return pk;
+    this.queryPk(mutationQuery);
   }
   fileInput(event) {
     const myThis = this;
@@ -169,7 +169,6 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
     let fileNames = this.state.files;
     fileReader.onload = function () {
       const usfm = fileReader.result.replaceAll(sTagRegex, ''); // remove \s5 tags
-      console.log(usfm);
       myThis.setState({
         result: usfm
       });
@@ -208,155 +207,181 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
       this.submit();
     }
   }
+  renderHTML() {
+    const config = __webpack_require__(/*! ./render_config.json */ "./src/comps/render_config.json");
+    this.queryPk('{ documents { slug: header(id:"bookCode") } }').then(res => {
+      const result = JSON.parse(res);
+      const bookSlugs = [];
+      result.data.documents.forEach(d => bookSlugs.push(d.slug.toUpperCase()));
+      config.bookSources = bookSlugs;
+      config.structure[0][2] = bookSlugs.map(s => this._bookCodeStructure(s));
+    }).then((0,proskomma_render_pdf__WEBPACK_IMPORTED_MODULE_2__.doRender)(pk, config).then(out => {
+      const win = window.open("", "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes");
+      win.document.body.innerHTML = out.output;
+    }));
+  }
+  _bookCodeStructure(slug) {
+    return ["bookCode", slug];
+  }
   render() {
-    return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
-      children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
+    return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("div", {
         className: "top-pane",
-        children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("h3", {
+        children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("h3", {
           children: "USFM GraphQL tool"
         }, void 0, false, {
           fileName: _jsxFileName,
-          lineNumber: 99,
+          lineNumber: 123,
           columnNumber: 21
         }, this)
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 98,
+        lineNumber: 122,
         columnNumber: 17
-      }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("hr", {}, void 0, false, {
+      }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("hr", {}, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 101,
+        lineNumber: 125,
         columnNumber: 17
-      }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
+      }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("div", {
         className: "main-body",
-        children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("span", {
+        children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("span", {
           className: "upload-header",
           children: "Upload .usfm file: "
         }, void 0, false, {
           fileName: _jsxFileName,
-          lineNumber: 103,
+          lineNumber: 127,
           columnNumber: 21
-        }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("input", {
+        }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("input", {
           type: "file",
           id: "file-picker",
           onChange: e => this.fileInput(e)
         }, void 0, false, {
           fileName: _jsxFileName,
-          lineNumber: 104,
+          lineNumber: 128,
           columnNumber: 21
-        }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
+        }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("div", {
           className: "split-container",
-          children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("div", {
             className: "input",
-            children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("h4", {
+            children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("h4", {
               children: "Query: "
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 107,
+              lineNumber: 131,
               columnNumber: 29
-            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("sup", {
+            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("sup", {
               children: "(tab indent supported)"
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 108,
+              lineNumber: 132,
               columnNumber: 29
-            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("textarea", {
+            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("textarea", {
               className: "query-input",
               onKeyDown: e => this.keyDown(e)
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 109,
+              lineNumber: 133,
               columnNumber: 29
-            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("br", {}, void 0, false, {
+            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("br", {}, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 110,
+              lineNumber: 134,
               columnNumber: 29
-            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("button", {
+            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("button", {
               className: "submit-button",
               onClick: () => this.submit(),
               children: "Execute (Ctrl + Enter)"
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 111,
+              lineNumber: 135,
               columnNumber: 29
-            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("br", {}, void 0, false, {
+            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("br", {}, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 114,
+              lineNumber: 138,
               columnNumber: 29
-            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("h4", {
+            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("h4", {
               children: "Files loaded:"
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 115,
+              lineNumber: 139,
               columnNumber: 29
-            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("pre", {
+            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("button", {
+              onClick: () => this.renderHTML(),
+              disabled: this.state.files.length == 0,
+              children: "Export HTML"
+            }, void 0, false, {
+              fileName: _jsxFileName,
+              lineNumber: 140,
+              columnNumber: 29
+            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("pre", {
               className: "files-loaded",
               children: this.state.files
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 116,
+              lineNumber: 141,
               columnNumber: 29
-            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("div", {
+            }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("div", {
               className: "footer",
-              children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("sup", {
-                children: ["See documentations at: ", /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("a", {
-                  href: "https://doc.proskomma.bible/en/latest/getting_started/tutorials/hello.html#querying-scripture",
-                  children: "read the doc"
+              children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("sup", {
+                children: ["See documentations at: ", /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("a", {
+                  target: "_blank",
+                  href: "https://github.com/AnonymousWalker/proskomma-usfm-graphql#readme",
+                  children: "github repo"
                 }, void 0, false, {
                   fileName: _jsxFileName,
-                  lineNumber: 119,
+                  lineNumber: 144,
                   columnNumber: 60
-                }, this), " and ", /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("a", {
+                }, this), " and ", /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("a", {
+                  target: "_blank",
                   href: "https://doc.proskomma.bible/en/latest/_static/schema/document.doc.html",
-                  children: "GraphQL Schema for usfm"
+                  children: "GraphQL schema reference"
                 }, void 0, false, {
                   fileName: _jsxFileName,
-                  lineNumber: 121,
+                  lineNumber: 146,
                   columnNumber: 46
                 }, this)]
               }, void 0, true, {
                 fileName: _jsxFileName,
-                lineNumber: 118,
+                lineNumber: 143,
                 columnNumber: 33
               }, this)
             }, void 0, false, {
               fileName: _jsxFileName,
-              lineNumber: 117,
+              lineNumber: 142,
               columnNumber: 29
             }, this)]
           }, void 0, true, {
             fileName: _jsxFileName,
-            lineNumber: 106,
+            lineNumber: 130,
             columnNumber: 25
-          }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("pre", {
+          }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("pre", {
             id: "output",
             children: this.state.result
           }, void 0, false, {
             fileName: _jsxFileName,
-            lineNumber: 127,
+            lineNumber: 152,
             columnNumber: 25
-          }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxDEV)("button", {
+          }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxDEV)("button", {
             className: "copy-clipboard-btn",
             onClick: () => this.copyToClipboard(),
             children: "Copy"
           }, void 0, false, {
             fileName: _jsxFileName,
-            lineNumber: 128,
+            lineNumber: 153,
             columnNumber: 25
           }, this)]
         }, void 0, true, {
           fileName: _jsxFileName,
-          lineNumber: 105,
+          lineNumber: 129,
           columnNumber: 21
         }, this)]
       }, void 0, true, {
         fileName: _jsxFileName,
-        lineNumber: 102,
+        lineNumber: 126,
         columnNumber: 17
       }, this)]
     }, void 0, true, {
       fileName: _jsxFileName,
-      lineNumber: 97,
+      lineNumber: 121,
       columnNumber: 13
     }, this);
   }
@@ -12897,6 +12922,443 @@ module.exports = function isArguments(value) {
   }
   return isArgs;
 };
+
+/***/ }),
+
+/***/ "./node_modules/proskomma-render/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/proskomma-render/index.js ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const ScriptureParaModel = __webpack_require__(/*! ./src/ScriptureParaModel */ "./node_modules/proskomma-render/src/ScriptureParaModel.js");
+const ScriptureDocSet = __webpack_require__(/*! ./src/ScriptureDocSet */ "./node_modules/proskomma-render/src/ScriptureDocSet.js");
+const ScriptureParaDocument = __webpack_require__(/*! ./src/ScriptureParaDocument */ "./node_modules/proskomma-render/src/ScriptureParaDocument.js");
+const ScriptureParaModelQuery = __webpack_require__(/*! ./src/model_query */ "./node_modules/proskomma-render/src/model_query.js");
+module.exports = {
+  ScriptureParaModel,
+  ScriptureDocSet,
+  ScriptureParaDocument,
+  ScriptureParaModelQuery
+};
+
+/***/ }),
+
+/***/ "./node_modules/proskomma-render/src/ScriptureDocSet.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/proskomma-render/src/ScriptureDocSet.js ***!
+  \**************************************************************/
+/***/ ((module) => {
+
+class ScriptureDocSet {
+  constructor(result, context, config) {
+    this.queryResult = result;
+    this.context = context;
+    this.config = config;
+    this.documentModels = {};
+    this.classActions = {
+      startDocSet: [],
+      endDocSet: []
+    };
+    this.delegatedActionKeys = new Set(['startDocument', 'endDocument', 'startSequence', 'endSequence', 'startBlock', 'endBlock', 'blockGraft', 'startItems', 'endItems', 'token', 'scope', 'inlineGraft', 'startStackRow', 'endStackRow']);
+    this.allActions = {};
+    this.scriptureModel = null;
+    this.key = null;
+  }
+  writeLogEntry(level, msg, component) {
+    this.scriptureModel.log.push({
+      component: component ? `${component}/${this.key}` : this.key,
+      level,
+      msg
+    });
+  }
+  addAction(actionType, test, action) {
+    if (actionType in this.classActions) {
+      this.classActions[actionType].push({
+        test,
+        action
+      });
+    } else if (this.delegatedActionKeys.has(actionType)) {
+      this.documentModels.default.addAction(actionType, test, action);
+    } else {
+      throw new Error(`Unknown action type '${actionType}' in docSet`);
+    }
+  }
+  addDocumentModel(modelKey, model) {
+    if (modelKey in this.documentModels) {
+      throw new Error(`A document model called '${modelKey}' has already been added`);
+    }
+    this.documentModels[modelKey] = model;
+    model.docSetModel = this;
+    model.key = modelKey;
+  }
+  applyClassActions(classActions, data) {
+    for (const classAction of classActions) {
+      if (classAction.test(this.context, data)) {
+        classAction.action(this, this.context, data);
+        break;
+      }
+    }
+  }
+  render(docSet, config, renderSpec) {
+    for (const action of Object.keys(this.classActions)) {
+      this.allActions[action] = (renderSpec.actions[action] || []).concat(this.classActions[action]);
+    }
+    const peripherals = {};
+    for (const p of docSet.documents.filter(d => d.idParts.type === 'periph')) {
+      peripherals[p.idParts.parts[2]] = p.idParts.parts[0];
+    }
+    this.context.docSet = {
+      id: docSet.id,
+      selectors: {},
+      tags: docSet.tags,
+      peripherals
+    };
+    for (const selector of docSet.selectors) {
+      this.context.docSet.selectors[selector.key] = selector.value;
+    }
+    this.renderStartDocSet(docSet);
+    let documents = docSet.documents;
+    const gloDocument = documents.filter(d => d.headers.filter(dh => dh.key === 'bookCode' && dh.value === 'GLO').length > 0);
+    if (gloDocument.length > 0) {
+      documents = [gloDocument[0], ...documents.filter(d => d.id !== gloDocument[0].id)];
+    }
+    for (const document of documents) {
+      if (renderSpec.document && renderSpec.document !== document.id) {
+        continue;
+      }
+      this.renderDocument(document, renderSpec);
+    }
+    this.renderEndDocSet(docSet);
+    delete this.context.docSet;
+  }
+  modelForDocument(document) {
+    return 'default';
+  }
+  renderDocument(document, renderSpec) {
+    renderSpec = renderSpec || {
+      actions: {}
+    };
+    const documentKey = this.modelForDocument(document);
+    if (!(documentKey in this.documentModels)) {
+      throw new Error(`Attempt to call unknown document model '${documentKey}': maybe you forgot 'addDocumentModel()'?`);
+    }
+    this.documentModels[documentKey].render(document, this.config, renderSpec);
+  }
+  renderStartDocSet(docSet) {
+    this.applyClassActions(this.allActions.startDocSet, docSet);
+  }
+  renderEndDocSet(docSet) {
+    this.applyClassActions(this.allActions.endDocSet, docSet);
+  }
+}
+module.exports = ScriptureDocSet;
+
+/***/ }),
+
+/***/ "./node_modules/proskomma-render/src/ScriptureParaDocument.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/proskomma-render/src/ScriptureParaDocument.js ***!
+  \********************************************************************/
+/***/ ((module) => {
+
+class ScriptureParaDocument {
+  constructor(result, context, config) {
+    this.queryResult = result;
+    this.result = result;
+    this.context = context;
+    this.config = config;
+    this.documentModels = {};
+    this.classActions = {
+      startDocument: [],
+      endDocument: [],
+      startSequence: [],
+      endSequence: [],
+      startBlock: [],
+      endBlock: [],
+      blockGraft: [],
+      startItems: [],
+      endItems: [],
+      token: [],
+      scope: [],
+      inlineGraft: [],
+      startStackRow: [],
+      endStackRow: []
+    };
+    this.delegatedActionKeys = new Set([]);
+    this.allActions = {};
+    this.docSetModel = null;
+    this.key = null;
+  }
+  writeLogEntry(level, msg) {
+    this.docSetModel.log.push({
+      component: `docSet${this.key === 'default' ? '' : `:${this.key}`}`,
+      level,
+      msg
+    });
+  }
+  addAction(actionType, test, action) {
+    if (actionType in this.classActions) {
+      this.classActions[actionType].push({
+        test,
+        action
+      });
+    } else if (this.delegatedActionKeys.has(actionType)) {
+      this.documentModels.default.addAction(actionType, test, action);
+    } else {
+      throw new Error(`Unknown action type '${actionType}' in docSet`);
+    }
+  }
+  applyClassActions(classActions, data) {
+    for (const classAction of classActions) {
+      if (classAction.test(this.context, data)) {
+        classAction.action(this, this.context, data);
+        break;
+      }
+    }
+  }
+  render(document, config, renderSpec) {
+    for (const action of Object.keys(this.classActions)) {
+      this.allActions[action] = (renderSpec.actions[action] || []).concat(this.classActions[action]);
+    }
+    this.context.document = {
+      id: document.id,
+      idType: document.idParts.type,
+      idParts: document.idParts.parts,
+      headers: {},
+      tags: document.tags
+    };
+    for (const header of document.headers) {
+      this.context.document.headers[header.key] = header.value;
+    }
+    this.renderStartDocument(document);
+    this.renderSequences(document.sequences, renderSpec);
+    this.renderEndDocument(document);
+    delete this.context.document;
+  }
+  renderSequences(sequences, renderSpec) {
+    this.context.sequences = {};
+    for (const sequence of sequences) {
+      this.context.sequences[sequence.id] = sequence;
+      if (sequence.type === "main") {
+        this.context.mainSequence = sequence;
+      }
+    }
+    this.context.sequenceStack = [];
+    this.renderSequenceId(renderSpec.sequence || this.context.mainSequence.id);
+    delete this.context.sequenceStack;
+    delete this.context.mainSequence;
+    delete this.context.sequences;
+  }
+  renderSequenceId(sequenceId) {
+    const sequence = this.context.sequences[sequenceId];
+    this.context.sequenceStack.unshift({
+      id: sequence.id,
+      type: sequence.type,
+      openScopes: new Set([]),
+      nBlocks: sequence.blocks.length,
+      renderStack: [[]]
+    });
+    this.renderStartSequence(sequence);
+    this.renderBlocks(sequence.blocks);
+    this.renderEndSequence(sequence);
+    this.context.sequenceStack.shift();
+  }
+  renderBlocks(blocks) {
+    for (const [n, block] of blocks.entries()) {
+      this.context.sequenceStack[0].block = {
+        blockScope: block.bs.payload,
+        nBlockGrafts: block.bg.length,
+        nItems: block.items.length,
+        blockPos: n
+      };
+      this.renderStartBlock(block);
+      this.renderBlockGrafts(block.bg);
+      this.renderStartItems(block.items);
+      this.renderItems(block.items);
+      this.renderEndItems(block.items);
+      this.renderEndBlock(block);
+      delete this.context.sequenceStack[0].block;
+    }
+  }
+  renderBlockGrafts(blockGrafts) {
+    for (const blockGraft of blockGrafts) {
+      this.renderBlockGraft(blockGraft);
+    }
+  }
+  renderItems(items) {
+    for (const [n, item] of items.entries()) {
+      this.context.sequenceStack[0].item = {
+        itemPos: n
+      };
+      this.renderItem(item);
+      delete this.context.sequenceStack[0].item;
+    }
+  }
+  renderItem(item) {
+    switch (item.type) {
+      case "token":
+        this.renderToken(item);
+        break;
+      case "scope":
+        this.renderScope(item);
+        break;
+      case "graft":
+        this.renderInlineGraft(item);
+        break;
+    }
+  }
+  renderStartDocument(document) {
+    this.applyClassActions(this.allActions.startDocument, document);
+  }
+  renderEndDocument(document) {
+    this.applyClassActions(this.allActions.endDocument, document);
+  }
+  renderStartSequence(sequence) {
+    this.applyClassActions(this.allActions.startSequence, sequence);
+  }
+  renderEndSequence(sequence) {
+    while (this.nStackRows() > 0) {
+      this.popStackRow();
+    }
+    this.applyClassActions(this.allActions.endSequence, sequence);
+  }
+  renderStartBlock(block) {
+    this.applyClassActions(this.allActions.startBlock, block);
+  }
+  renderEndBlock(block) {
+    this.applyClassActions(this.allActions.endBlock, block);
+  }
+  renderBlockGraft(blockGraft) {
+    this.context.sequenceStack[0].blockGraft = {
+      subType: blockGraft.subType
+    };
+    this.applyClassActions(this.allActions.blockGraft, blockGraft);
+    delete this.context.sequenceStack[0].blockGraft;
+  }
+  renderStartItems(items) {
+    this.applyClassActions(this.allActions.startItems, items);
+  }
+  renderEndItems(items) {
+    this.applyClassActions(this.allActions.endItems, items);
+  }
+  renderToken(token) {
+    this.applyClassActions(this.allActions.token, token);
+  }
+  renderScope(scope) {
+    if (scope.subType === "start") {
+      this.context.sequenceStack[0].openScopes.add(scope.payload);
+    }
+    this.applyClassActions(this.allActions.scope, scope);
+    if (scope.subType === "end") {
+      this.context.sequenceStack[0].openScopes.delete(scope.payload);
+    }
+  }
+  renderInlineGraft(graft) {
+    this.context.sequenceStack[0].inlineGraft = {
+      subType: graft.subType
+    };
+    this.applyClassActions(this.allActions.inlineGraft, graft);
+    delete this.context.sequenceStack[0].inlineGraft;
+  }
+  appendToTopStackRow(item) {
+    this.context.sequenceStack[0].renderStack[0].push(item);
+  }
+  nStackRows() {
+    return this.context.sequenceStack[0].renderStack.length;
+  }
+  topStackRow() {
+    return this.context.sequenceStack[0].renderStack[0];
+  }
+  pushStackRow() {
+    this.applyClassActions(this.allActions.startStackRow, this.topStackRow);
+    this.context.sequenceStack[0].renderStack.unshift([]);
+  }
+  popStackRow() {
+    this.applyClassActions(this.allActions.endStackRow, this.topStackRow);
+    return this.context.sequenceStack[0].renderStack.shift();
+  }
+}
+module.exports = ScriptureParaDocument;
+
+/***/ }),
+
+/***/ "./node_modules/proskomma-render/src/ScriptureParaModel.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/proskomma-render/src/ScriptureParaModel.js ***!
+  \*****************************************************************/
+/***/ ((module) => {
+
+class ScriptureParaModel {
+  constructor(result, config) {
+    this.queryResult = result;
+    this.config = config;
+    this.context = {};
+    this.docSetModels = {};
+    this.delegatedActionKeys = new Set(['startDocSet', 'endDocSet', 'startDocument', 'endDocument', 'startSequence', 'endSequence', 'startBlock', 'endBlock', 'blockGraft', 'startItems', 'endItems', 'token', 'scope', 'inlineGraft', 'startStackRow', 'endStackRow']);
+    this.allActions = {};
+    this.log = [];
+  }
+  logString() {
+    return this.log.map(l => `${l.level} from ${l.component}: ${l.msg}`).join('\n');
+  }
+  addDocSetModel(modelKey, model) {
+    if (modelKey in this.docSetModels) {
+      throw new Error(`A docSet model called '${modelKey}' has already been added`);
+    }
+    this.docSetModels[modelKey] = model;
+    model.scriptureModel = this;
+    model.key = modelKey;
+  }
+  addAction(actionType, test, action) {
+    if (!this.delegatedActionKeys.has(actionType)) {
+      throw new Error(`Unknown action type '${actionType}'`);
+    }
+    this.docSetModels.default.addAction(actionType, test, action);
+  }
+  modelForDocSet(docSet) {
+    return 'default';
+  }
+  render(renderSpec) {
+    renderSpec = renderSpec || {
+      actions: {}
+    };
+    for (const docSet of this.queryResult.docSets) {
+      if (renderSpec.docSet && renderSpec.docSet !== docSet.id) {
+        continue;
+      }
+      const docSetKey = this.modelForDocSet(docSet);
+      if (!(docSetKey in this.docSetModels)) {
+        throw new Error(`Attempt to call unknown docSet model '${docSetKey}': maybe you forgot 'addDocSetModel()'?`);
+      }
+      this.docSetModels[docSetKey].render(docSet, this.config, renderSpec);
+    }
+    this.allActions = {};
+  }
+}
+module.exports = ScriptureParaModel;
+
+/***/ }),
+
+/***/ "./node_modules/proskomma-render/src/model_query.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/proskomma-render/src/model_query.js ***!
+  \**********************************************************/
+/***/ ((module) => {
+
+const doModelQuery = async (pk, docSetIds, documentIds) => {
+  // Empty arrays mean all docSets/documents
+  docSetIds = docSetIds || [];
+  documentIds = documentIds || [];
+  const result = await pk.gqlQuery('{' + `  docSets${docSetIds.length === 0 ? '' : `(ids:[${docSetIds.map(ds => `"${ds}"`).join(', ')}])`} {` + '    id' + '    selectors { key value }' + '    tags' + `    documents${documentIds.length === 0 ? '' : `(ids:[${documentIds.map(d => `"${d}"`).join(', ')}])`} {` + '      id' + '      headers { key value }' + '      idParts { type parts }' + '      tags' + '      sequences {' + '        id' + '        type' +
+  //        '        tags' +
+  '        blocks {' + '          bs { payload }' + '          bg { subType payload }' + '          items { type subType payload }' + '        }' + '      }' + '    }' + '  }' + '}');
+  if (result.errors) {
+    throw new Error(result.errors);
+  }
+  return result.data;
+};
+module.exports = doModelQuery;
 
 /***/ }),
 
@@ -73093,6 +73555,805 @@ module.exports = function availableTypedArrays() {
   return out;
 };
 
+/***/ }),
+
+/***/ "./node_modules/proskomma-render-pdf/CanonicalDocument.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/proskomma-render-pdf/CanonicalDocument.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CanonicalDocument)
+/* harmony export */ });
+/* harmony import */ var proskomma_render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! proskomma-render */ "./node_modules/proskomma-render/index.js");
+/* harmony import */ var _shared_actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./shared_actions.js */ "./node_modules/proskomma-render-pdf/shared_actions.js");
+
+
+class CanonicalDocument extends proskomma_render__WEBPACK_IMPORTED_MODULE_0__.ScriptureParaDocument {
+  constructor(result, context, config) {
+    super(result, context, config);
+    this.head = [];
+    this.bodyHead = [];
+    this.body = [];
+    this.chapter = {
+      waiting: false,
+      c: null,
+      cp: null,
+      ca: null,
+      cc: 0
+    };
+    this.verses = {
+      waiting: false,
+      v: null,
+      vp: null,
+      va: null
+    };
+    addActions(this);
+  }
+  maybeRenderChapter() {
+    if (this.chapter.waiting) {
+      const chapterLabel = this.chapter.cp || this.chapter.c;
+      let chapterId = this.chapter.c;
+      if (this.chapter.cpc > 0) {
+        chapterId = `${chapterId}_${this.chapter.cpc}`;
+      }
+      this.context.document.chapters.push([chapterId, chapterLabel]);
+      this.body.push(`<h3 class="chapter">${chapterLabel}</h3>\n`);
+      this.body.push(`<p class="chapN">Chapter ${chapterLabel}</p>\n`);
+      this.chapter.waiting = false;
+    }
+  }
+  maybeRenderVerse() {
+    if (this.verses.waiting) {
+      const verseLabel = this.verses.vp || this.verses.v;
+      this.appendToTopStackRow(`<span class="verses">${verseLabel}</span>&#160;`);
+      this.verses.waiting = false;
+    }
+  }
+}
+const addActions = dInstance => {
+  // Initialize headers (not including title) and other state
+  dInstance.addAction('startDocument', () => true, (renderer, context) => {
+    let cssPath = "../../CSS/styles.css";
+    dInstance.head = ['<meta charset="utf-8"/>\n', `<link type="text/css" rel="stylesheet" href="${cssPath}" />\n`, `<title>${context.document.headers.h}</title>`];
+    dInstance.body = [];
+    dInstance.bodyHead = [];
+    dInstance.docSetModel.bookTitles[context.document.headers.bookCode] = [context.document.headers.h, context.document.headers.toc, context.document.headers.toc2, context.document.headers.toc3];
+    dInstance.chapter = {
+      waiting: false,
+      c: null,
+      cp: null,
+      cc: 0
+    };
+    dInstance.verses = {
+      waiting: false,
+      v: null,
+      vp: null,
+      vc: 0
+    };
+    dInstance.context.document.chapters = [];
+  });
+  // Follow some block grafts to secondary content
+  dInstance.addAction('blockGraft', context => ["title", "heading", "introduction"].includes(context.sequenceStack[0].blockGraft.subType), (renderer, context, data) => {
+    renderer.renderSequenceId(data.payload);
+  });
+  // Start new stack row for new block
+  dInstance.addAction(..._shared_actions_js__WEBPACK_IMPORTED_MODULE_1__["default"].startBlock);
+  // Render title block
+  dInstance.addAction('endBlock', context => context.sequenceStack[0].type === "title", (renderer, context, data) => {
+    const htmlClass = data.bs.payload.split('/')[1];
+    const tag = ["mt", "ms"].includes(htmlClass) ? "h1" : "h2";
+    const idAtt = htmlClass === 'mt' ? ` id="title_${context.document.headers.bookCode}"` : '';
+    renderer.bodyHead.push(`<${tag} class="${htmlClass}"${idAtt}>${renderer.topStackRow().join("").trim()}</${tag}>\n`);
+    renderer.popStackRow();
+  });
+  // Render heading block
+  dInstance.addAction('endBlock', context => context.sequenceStack[0].type === "heading", (renderer, context, data) => {
+    const htmlClass = data.bs.payload.split("/")[1];
+    let headingTag;
+    switch (htmlClass) {
+      case "s":
+      case "is":
+        headingTag = "h3";
+        break;
+      default:
+        headingTag = "h4";
+    }
+    renderer.body.push(`<${headingTag} class="${htmlClass}">${renderer.topStackRow().join("").trim()}</${headingTag}>\n`);
+    renderer.popStackRow();
+  });
+  // process footnote content
+  dInstance.addAction('endBlock', context => context.sequenceStack[0].type === "footnote", renderer => {
+    const footnoteContent = renderer.topStackRow().join("").trim("");
+    renderer.popStackRow();
+    renderer.context.sequenceStack[1].renderStack[0].push(`<span class="footnote">${footnoteContent}</span>`);
+  });
+  // Render main or introduction block in a div with class derived from the block scope
+  dInstance.addAction('endBlock', context => ["main", "introduction"].includes(context.sequenceStack[0].type), (renderer, context, data) => {
+    const htmlClass = data.bs.payload.split("/")[1];
+    renderer.body.push(`<div class="${htmlClass} ${context.sequenceStack[0].type}_sequence">${renderer.topStackRow().join("").trim()}</div>\n`);
+    renderer.popStackRow();
+  });
+  // Chapter: maintain state variables, store for rendering by maybeRenderChapter()
+  dInstance.addAction('scope', (context, data) => data.subType === 'start' && data.payload.startsWith("chapter/"), (renderer, context, data) => {
+    dInstance.chapter.waiting = true;
+    const chapterLabel = data.payload.split("/")[1];
+    dInstance.chapter.c = chapterLabel;
+    dInstance.chapter.cp = null;
+    dInstance.chapter.cpc = 0;
+    dInstance.chapter.ca = null;
+    dInstance.chapter.cc++;
+  });
+  // pubChapter: maintain state variables, store for rendering by maybeRenderChapter()
+  dInstance.addAction('scope', (context, data) => data.subType === "start" && data.payload.startsWith("pubChapter/"), (renderer, context, data) => {
+    dInstance.chapter.waiting = true;
+    const chapterLabel = data.payload.split("/")[1];
+    dInstance.chapter.cp = chapterLabel;
+    dInstance.chapter.cpc++;
+  });
+  // Verses: maintain state variables, store for rendering by maybeRenderVerse()
+  dInstance.addAction('scope', (context, data) => data.subType === 'start' && data.payload.startsWith("verses/"), (renderer, context, data) => {
+    dInstance.verses.waiting = true;
+    const verseLabel = data.payload.split("/")[1];
+    dInstance.verses.v = verseLabel;
+    dInstance.verses.vp = null;
+    dInstance.verses.vc++;
+  });
+  // pubVerse: maintain state variables, store for rendering by maybeRenderVerse()
+  dInstance.addAction('scope', (context, data) => data.subType === 'start' && data.payload.startsWith("pubVerse/"), (renderer, context, data) => {
+    dInstance.verses.waiting = true;
+    const verseLabel = data.payload.split("/")[1];
+    dInstance.verses.vp = verseLabel;
+    dInstance.verses.vc++;
+  });
+  // Character markup - open or close an element
+  dInstance.addAction(..._shared_actions_js__WEBPACK_IMPORTED_MODULE_1__["default"].characterScope);
+  // Unhandled scope
+  dInstance.addAction(..._shared_actions_js__WEBPACK_IMPORTED_MODULE_1__["default"].w);
+  dInstance.addAction(..._shared_actions_js__WEBPACK_IMPORTED_MODULE_1__["default"].unhandledScope);
+  // Tokens, including attempt to add French spaces and half-spaces after punctuation
+  dInstance.addAction('token', () => true, (renderer, context, data) => {
+    let tokenString;
+    if (["lineSpace", "eol"].includes(data.subType)) {
+      tokenString = " ";
+    } else {
+      if (context.sequenceStack[0].type === "main") {
+        dInstance.maybeRenderChapter();
+        dInstance.maybeRenderVerse();
+      }
+      if ([";", "!", "?"].includes(data.payload)) {
+        if (renderer.topStackRow().length > 0) {
+          let lastPushed = renderer.topStackRow().pop();
+          lastPushed = lastPushed.replace(/ $/, "&#8239;");
+          renderer.appendToTopStackRow(lastPushed);
+        }
+        tokenString = data.payload;
+      } else if ([":", "»"].includes(data.payload)) {
+        if (renderer.topStackRow().length > 0) {
+          let lastPushed = renderer.topStackRow().pop();
+          lastPushed = lastPushed.replace(/ $/, "&#160;");
+          renderer.appendToTopStackRow(lastPushed);
+        }
+        tokenString = data.payload;
+      } else {
+        tokenString = data.payload.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+    }
+    return renderer.appendToTopStackRow(tokenString);
+  });
+  // process footnote
+  dInstance.addAction('inlineGraft', (context, data) => data.subType === "footnote", (renderer, context, data) => {
+    renderer.renderSequenceId(data.payload);
+  });
+  // Generate document HTML
+  dInstance.addAction('endSequence', context => context.sequenceStack[0].type === "main", (renderer, context) => {
+    let bodyHead = renderer.bodyHead.join("");
+    renderer.config.bookOutput[context.document.headers.bookCode] = ['<div class="bibleBook">\n', `<p class="runningHeader">${context.document.headers.toc}</p>\n`, `<header>\n${bodyHead}\n</header>\n`, '<div class="bibleBookBody">\n', renderer.body.join(""), '</div>\n', '</div>\n'].join("");
+  });
+  // Add hr to separate introduction from main content
+  dInstance.addAction('endSequence', context => context.sequenceStack[0].type === "introduction", renderer => {
+    renderer.body.push("<hr/>\n");
+  });
+};
+
+/***/ }),
+
+/***/ "./node_modules/proskomma-render-pdf/MainDocSet.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/proskomma-render-pdf/MainDocSet.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ MainDocSet)
+/* harmony export */ });
+/* harmony import */ var proskomma_render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! proskomma-render */ "./node_modules/proskomma-render/index.js");
+/* harmony import */ var _CanonicalDocument_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CanonicalDocument.js */ "./node_modules/proskomma-render-pdf/CanonicalDocument.js");
+/* harmony import */ var _PeripheralDocument_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PeripheralDocument.js */ "./node_modules/proskomma-render-pdf/PeripheralDocument.js");
+/* harmony import */ var _htmlResources_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./htmlResources.js */ "./node_modules/proskomma-render-pdf/htmlResources.js");
+
+
+
+
+class MainDocSet extends proskomma_render__WEBPACK_IMPORTED_MODULE_0__.ScriptureDocSet {
+  constructor(result, context, config) {
+    super(result, context, config);
+    this.frontOutput = [];
+    this.backOutput = [];
+    this.bookTitles = {};
+    this.output = '';
+    addActions(this);
+  }
+  modelForDocument(document) {
+    if (document.idParts.type === 'periph') {
+      return 'peripheral';
+    } else {
+      return 'default';
+    }
+  }
+}
+const addActions = dsInstance => {
+  const dInstance = new _CanonicalDocument_js__WEBPACK_IMPORTED_MODULE_1__["default"](dsInstance.result, dsInstance.context, dsInstance.config);
+  dsInstance.addDocumentModel('default', dInstance);
+  const pDInstance = new _PeripheralDocument_js__WEBPACK_IMPORTED_MODULE_2__["default"](dsInstance.result, dsInstance.context, dsInstance.config);
+  dsInstance.addDocumentModel('peripheral', pDInstance);
+  dsInstance.addAction('startDocSet', () => true, renderer => {
+    const flattenedStructure = a => {
+      let ret = [];
+      for (const e of a) {
+        if (e[0] === 'section') {
+          ret = [...ret, ...flattenedStructure(e[2])];
+        } else {
+          ret.push(e);
+        }
+      }
+      return ret;
+    };
+    renderer.bookTitles = {};
+    renderer.usedDocuments = flattenedStructure(renderer.config.structure).map(e => e[0] === 'bookCode' ? e[1] : renderer.context.docSet.peripherals[e[1]]);
+  });
+  dsInstance.addAction('endDocSet', () => true, renderer => {
+    const nestedToc = (records, level) => {
+      level = level || 1;
+      let ret = [];
+      for (const record of records) {
+        if (record[0] === 'section') {
+          ret.push(`<li>\n<div class="toc_level${level}">${renderer.config.i18n[record[1]] || '???'}</div>\n<ol>\n${nestedToc(record[2], level + 1)}</ol>\n</li>`);
+        } else if (record[0] === 'periph') {
+          const pName = renderer.context.docSet.peripherals[record[1]];
+          ret.push(`<li class="toc_periph leader"><a href="#title_${renderer.context.docSet.peripherals[record[1]]}">${renderer.bookTitles[pName][2]}</a></li>`);
+        } else if (record[1] === 'GLO') {
+          ret.push(`<li class="leader"><a href="#title_${record[1]}">${renderer.config.i18n.glossary}</a></li>\n`);
+        } else {
+          if (!(record[1] in renderer.bookTitles)) {
+            throw new Error(`Book title for ${record[1]} not found - was the document loaded?`);
+          }
+          ret.push(`<li class="leader"><a href="#title_${record[1]}">${renderer.bookTitles[record[1]][2]}</a></li>`);
+        }
+      }
+      return ret.join('\n');
+    };
+    let startHTML = _htmlResources_js__WEBPACK_IMPORTED_MODULE_3__.startHTMLTemplate;
+    startHTML = startHTML.replace(/%titlePage%/g, renderer.config.i18n.titlePage);
+    const textDirection = renderer.config.textDirection || 'ltr';
+    startHTML = startHTML.replace(/%textDirection%/g, textDirection);
+    startHTML = startHTML.replace(/%left%/g, textDirection === 'ltr' ? 'left' : 'right');
+    startHTML = startHTML.replace(/%right%/g, textDirection === 'ltr' ? 'right' : 'left');
+    renderer.frontOutput.push(startHTML);
+    let title = _htmlResources_js__WEBPACK_IMPORTED_MODULE_3__.titleHTMLTemplate;
+    title = title.replace(/%titlePage%/g, renderer.config.i18n.titlePage);
+    title = title.replace(/%copyright%/g, renderer.config.i18n.copyright);
+    renderer.frontOutput.push(title);
+    let toc = _htmlResources_js__WEBPACK_IMPORTED_MODULE_3__.tocHTMLTemplate;
+    toc = toc.replace(/%contentLinks%/g, nestedToc(renderer.config.structure));
+    toc = toc.replace(/%toc_books%/g, renderer.config.i18n.tocBooks);
+    renderer.frontOutput.push(toc);
+    let bodyOutput = renderer.usedDocuments.map(b => renderer.config.bookOutput[b]).join('');
+    let endHTML = _htmlResources_js__WEBPACK_IMPORTED_MODULE_3__.endHTMLTemplate;
+    renderer.backOutput.push(endHTML);
+    const output = renderer.frontOutput.join('\n') + '\n' + bodyOutput + renderer.backOutput.join('\n');
+    renderer.config.output = output;
+  });
+};
+
+/***/ }),
+
+/***/ "./node_modules/proskomma-render-pdf/PeripheralDocument.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/proskomma-render-pdf/PeripheralDocument.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ PeripheralDocument)
+/* harmony export */ });
+/* harmony import */ var proskomma_render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! proskomma-render */ "./node_modules/proskomma-render/index.js");
+/* harmony import */ var _shared_actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./shared_actions.js */ "./node_modules/proskomma-render-pdf/shared_actions.js");
+
+
+class PeripheralDocument extends proskomma_render__WEBPACK_IMPORTED_MODULE_0__.ScriptureParaDocument {
+  constructor(result, context, config) {
+    super(result, context, config);
+    this.head = [];
+    this.bodyHead = [];
+    this.body = [];
+    addActions(this);
+  }
+}
+const addActions = dInstance => {
+  // Initialize headers (not including title) and other state
+  dInstance.addAction('startDocument', () => true, (renderer, context) => {
+    let cssPath = "../../CSS/styles.css";
+    dInstance.head = ['<meta charset="utf-8"/>\n', `<link type="text/css" rel="stylesheet" href="${cssPath}" />\n`, `<title>${context.document.headers.h}</title>`];
+    dInstance.body = [];
+    dInstance.bodyHead = [];
+    const periphTitle = context.document.idParts[3];
+    dInstance.docSetModel.bookTitles[context.document.headers.bookCode] = [periphTitle, periphTitle, periphTitle, periphTitle];
+    dInstance.context.document.chapters = [];
+  });
+  // Follow some block grafts to secondary content
+  dInstance.addAction('blockGraft', context => ["title", "heading", "introduction"].includes(context.sequenceStack[0].blockGraft.subType), (renderer, context, data) => {
+    renderer.renderSequenceId(data.payload);
+  });
+  // Start new stack row for new block
+  dInstance.addAction(..._shared_actions_js__WEBPACK_IMPORTED_MODULE_1__["default"].startBlock);
+  // Render title block
+  dInstance.addAction('endBlock', context => context.sequenceStack[0].type === "title", (renderer, context, data) => {
+    const htmlClass = data.bs.payload.split('/')[1];
+    const tag = ["mt", "ms"].includes(htmlClass) ? "h1" : "h2";
+    renderer.bodyHead.push(`<${tag} class="${htmlClass}">${renderer.topStackRow().join("").trim()}</${tag}>\n`);
+    renderer.popStackRow();
+  });
+  // Render heading block
+  dInstance.addAction('endBlock', context => context.sequenceStack[0].type === "heading", (renderer, context, data) => {
+    const htmlClass = data.bs.payload.split("/")[1];
+    let headingTag;
+    switch (htmlClass) {
+      case "s":
+      case "is":
+        headingTag = "h3";
+        break;
+      default:
+        headingTag = "h4";
+    }
+    renderer.body.push(`<${headingTag} class="${htmlClass}">${renderer.topStackRow().join("").trim()}</${headingTag}>\n`);
+    renderer.popStackRow();
+  });
+  // process footnote content
+  dInstance.addAction('endBlock', context => context.sequenceStack[0].type === "footnote", renderer => {
+    const footnoteContent = renderer.topStackRow().join("").trim("");
+    renderer.popStackRow();
+    renderer.context.sequenceStack[1].renderStack[0].push(`<span class="footnote">${footnoteContent}</span>`);
+  });
+  // Render main or introduction block in a div with class derived from the block scope
+  dInstance.addAction('endBlock', context => ["main", "introduction"].includes(context.sequenceStack[0].type), (renderer, context, data) => {
+    const htmlClass = data.bs.payload.split("/")[1];
+    renderer.body.push(`<div class="${htmlClass}">${renderer.topStackRow().join("").trim()}</div>\n`);
+    renderer.popStackRow();
+  });
+  // Character markup - open or close an element
+  dInstance.addAction(..._shared_actions_js__WEBPACK_IMPORTED_MODULE_1__["default"].characterScope);
+  // Unhandled scope
+  dInstance.addAction(..._shared_actions_js__WEBPACK_IMPORTED_MODULE_1__["default"].w);
+  dInstance.addAction(..._shared_actions_js__WEBPACK_IMPORTED_MODULE_1__["default"].unhandledScope);
+  // Tokens, including attempt to add French spaces and half-spaces after punctuation
+  dInstance.addAction('token', () => true, (renderer, context, data) => {
+    let tokenString;
+    if (["lineSpace", "eol"].includes(data.subType)) {
+      tokenString = " ";
+    } else {
+      if ([";", "!", "?"].includes(data.payload)) {
+        if (renderer.topStackRow().length > 0) {
+          let lastPushed = renderer.topStackRow().pop();
+          lastPushed = lastPushed.replace(/ $/, "&#8239;");
+          renderer.appendToTopStackRow(lastPushed);
+        }
+        tokenString = data.payload;
+      } else if ([":", "»"].includes(data.payload)) {
+        if (renderer.topStackRow().length > 0) {
+          let lastPushed = renderer.topStackRow().pop();
+          lastPushed = lastPushed.replace(/ $/, "&#160;");
+          renderer.appendToTopStackRow(lastPushed);
+        }
+        tokenString = data.payload;
+      } else {
+        tokenString = data.payload.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+    }
+    return renderer.appendToTopStackRow(tokenString);
+  });
+  // process footnote
+  dInstance.addAction('inlineGraft', (context, data) => data.subType === "footnote", (renderer, context, data) => {
+    renderer.renderSequenceId(data.payload);
+  });
+  // Generate document HTML
+  dInstance.addAction('endSequence', context => context.sequenceStack[0].type === "main", (renderer, context) => {
+    let bodyHead = renderer.bodyHead.join("");
+    renderer.config.bookOutput[context.document.headers.bookCode] = ['<div class="periph">\n', `<a id="title_${context.document.headers.bookCode}"/>\n`, `<p class="runningHeader">${dInstance.docSetModel.bookTitles[context.document.headers.bookCode][0]}</p>\n`, `<header>\n${bodyHead}\n</header>\n`, '<div class="periphBody">\n', renderer.body.join(""), '</div>\n', '</div>\n'].join("");
+  });
+};
+
+/***/ }),
+
+/***/ "./node_modules/proskomma-render-pdf/htmlResources.js":
+/*!************************************************************!*\
+  !*** ./node_modules/proskomma-render-pdf/htmlResources.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "endHTMLTemplate": () => (/* binding */ endHTMLTemplate),
+/* harmony export */   "pagedJSStyle": () => (/* binding */ pagedJSStyle),
+/* harmony export */   "startHTMLTemplate": () => (/* binding */ startHTMLTemplate),
+/* harmony export */   "titleHTMLTemplate": () => (/* binding */ titleHTMLTemplate),
+/* harmony export */   "tocHTMLTemplate": () => (/* binding */ tocHTMLTemplate)
+/* harmony export */ });
+const pagedJSStyle = `@page {
+            size: 210mm 297mm;
+            margin-top: 20mm;
+            margin-left: 20mm;
+            margin-bottom: 30mm;
+
+            @footnote {
+                float:bottom;
+                border-top: black 1px solid;
+                padding-top: 2mm;
+                font-size: 8pt;
+            }
+
+            @bottom-center {
+                content: counter(page);
+            }
+
+            @top-center {
+                content: element(heading);
+            }
+
+            @top-right {
+                content: none;
+            }
+        }
+
+        @page :blank {
+            @bottom-center {
+                content: none;
+            }
+
+            @top-center {
+                content: none;
+            }
+
+            @top-right {
+                content: none;
+            }
+
+        }
+
+        @page :right {
+            margin-left: 30mm;
+            margin-right: 20mm;
+        }
+
+        @page :left {
+            margin-right: 30mm;
+            margin-left: 20mm;
+        }
+
+        div.titlePage {
+            text-align: center;
+        }
+
+        h1, h2, h3, h4 {
+            page-break-after: avoid;
+            margin-bottom: 2px;
+        }
+
+        #toc_ul li {
+            list-style-type: none;
+            overflow-x: hidden;
+        }
+
+        #toc_ul li a {
+            text-decoration: none;
+            color: #000;
+            background-color: white;
+            padding-right: 6px;
+        }
+
+        #toc_ul li a::after {
+            content: target-counter(attr(href url), page, decimal);
+            float: right;
+        }
+
+        #toc_ul li.leader::after {
+            content: ".................................................................................................................................................";
+            float: left;
+            width: 0;
+            padding-left: 5px;
+            letter-spacing: 6px;
+        }
+
+        #toc_ul li.leader a::after {
+            position: absolute;
+            right: 0;
+            background-color: white;
+            padding-left: 6px;
+        }
+
+        .leader {
+            font-size: 9pt;
+        }
+
+        p.runningHeader {
+            position: running(heading);
+            font-style: italic;
+            font-size: 8pt;
+        }
+
+        p.chapN {
+            position: running(chapN);
+            font-style: italic;
+            font-size: 8pt;
+        }
+
+        span.footnote {float: footnote; }
+
+        div.titlePage {
+            page-break-after: recto;
+            text-align: center;
+        }
+
+        div.toc {page-break-after: recto}
+        div.bibleBook {
+            page-break-after: recto;
+        }
+        div.periph {
+            page-break-after: recto;
+        }
+        div.introduction_sequence {
+            columns: 1;
+            font-family: sans-serif;
+        }
+        hr {page-break-after: recto}
+        div.bibleBookBody {
+            columns: 2;
+            column-gap: 2em;
+            widows: 2;
+        }
+
+        div.periphBody {
+            columns: 1;
+            widows: 2;
+        }
+
+        .toc_periph {font-style: italic}
+        .toc_level1, .toc_level2, .toc_level3 {margin-top: 5px}
+        .toc_level1 {
+            font-size: 14pt;
+            font-weight: bold;
+        }
+        .toc_level2 {font-size: 12pt}
+        .toc_level3 {font-size: 10pt}
+
+        .d {font-style: italic}
+        .mt, .mt2, .mt3, .imt, .imt2, .imt3 {margin-bottom: 1ex}
+        .mt, .mt2, .mt3 {text-align: center}
+        .mt, .imt {font-weight: bold}
+        .ms, .ms2, .ms3 {}
+        .r {font-weight: normal; font-style: italic; margin-top: 0; font-size: smaller}
+        .is, .s {}
+        .is2, .s2 {}
+
+        .ili, .ip, .m, .p, .q, .q2, .q3, .q4 {margin-bottom: 0.4em; margin-top: 0.4em; font-size: 10pt;}
+        .ili, .ip, .m, .p { text-align: justify }
+        .ili {padding-left: 1.5em; font-size: 10pt;}
+        .io, .io2 {font-size: 10pt; font-family: sans-serif}
+        .io2 {padding-left: 1.5em}
+        .ior {font-style: italic}
+        .ip {font-family: sans-serif; font-size: 10pt;}
+        .q, .q1, .pi {padding-left: 1.5em; font-size: 10pt;}
+        .q2 {padding-left: 2.5em; font-size: 10pt;}
+        .q3 {padding-left: 3.5em; font-size: 10pt;}
+        .q4 {padding-left: 4.5em; font-size: 10pt;}
+
+        .bd {font-weight: bold}
+        .bk {font-style: italic}
+        .dc {}
+        .em {font-style: italic}
+        .fk {font-style: italic; font-weight: bold}
+        .fq {font-style: italic}
+        .fqa {font-style: italic}
+        .fr {font-weight: bold; font-size: 8pt}
+        .ft {}
+        .fv {}
+        .it {font-style: italic}
+        .k {font-weight: bold; font-style: italic}
+        .nd {font-variant: small-caps}
+        .ord {font-size: 7pt; vertical-align: top}
+        .pn {}
+        .qs {font-style: italic; float: right; padding-left: 1em}
+        .sls {font-style: italic}
+        .tl {font-style: italic}
+        .tr {font-size: 10pt}
+        .wj {color: #600}
+        .xt {font-weight: bold}
+
+        .chapter {
+            padding-%right%: 0.25em;
+            float: %left%;
+            vertical-align: top;
+            margin-top:0;
+            margin-bottom: 0;
+            font-size: 24pt;
+        }
+        .verses {font-size: 7pt; font-weight: bold}`;
+const startHTMLTemplate = `<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>%titlePage%</title>
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+    <style>
+${pagedJSStyle}
+    </style>
+</head>
+<body>
+<div  dir="%textDirection%">
+`;
+const endHTMLTemplate = `</div>
+</body>
+</html>
+`;
+const tocHTMLTemplate = '<div class="toc">\n' + '    <h1>%toc_books%</h1>\n' + '    <ul id="toc_ul">\n' + '        %contentLinks%\n' + '    </ul>\n' + '</div>';
+const titleHTMLTemplate = `<div class="titlePage">
+    <h1>%titlePage%</h1>
+    <h3>%copyright%</h3>
+</div>
+`;
+
+
+/***/ }),
+
+/***/ "./node_modules/proskomma-render-pdf/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/proskomma-render-pdf/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "configIssues": () => (/* binding */ configIssues),
+/* harmony export */   "doRender": () => (/* binding */ doRender)
+/* harmony export */ });
+/* harmony import */ var proskomma_render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! proskomma-render */ "./node_modules/proskomma-render/index.js");
+/* harmony import */ var _MainDocSet_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainDocSet.js */ "./node_modules/proskomma-render-pdf/MainDocSet.js");
+
+
+const configIssues = config => {
+  const checkStructure = structure => {
+    let ret = [];
+    for (const el of structure) {
+      if (el[0] === 'bookCode') {
+        const re = new RegExp('^[A-Z0-9]{3}$');
+        if (!re.test(el[1])) {
+          ret.push(`bookCode '${el[1]}' in structure is not valid`);
+        }
+      } else {
+        if (!(el[1] in config.i18n)) {
+          ret.push(`No i18n for section '${el[1]}' in structure`);
+        }
+        checkStructure(el[2]).forEach(e => ret.push(e));
+      }
+    }
+    return ret;
+  };
+  const ret = checkStructure(config.structure);
+  return ret;
+};
+const doRender = async (pk, config, docSetIds, documentIds) => {
+  const configErrors = configIssues(config);
+  if (configErrors.length > 0) {
+    throw new Error(`Config Issues: ${configErrors.join('; ')}`);
+  }
+  let ts = Date.now();
+  const doMainRender = (config, result) => {
+    const model = new proskomma_render__WEBPACK_IMPORTED_MODULE_0__.ScriptureParaModel(result, config);
+    model.addDocSetModel('default', new _MainDocSet_js__WEBPACK_IMPORTED_MODULE_1__["default"](result, model.context, config));
+    model.render();
+    console.log(`Main rendered in  ${(Date.now() - ts) / 1000} sec`);
+    console.log(model.logString());
+  };
+  const thenFunction = result => {
+    console.log(`Query processed in  ${(Date.now() - ts) / 1000} sec`);
+    ts = Date.now();
+    doMainRender(config, result);
+    return config;
+  };
+  const result = await (0,proskomma_render__WEBPACK_IMPORTED_MODULE_0__.ScriptureParaModelQuery)(pk, docSetIds || [], documentIds || []);
+  return thenFunction(result);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/proskomma-render-pdf/shared_actions.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/proskomma-render-pdf/shared_actions.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  // Character markup - open or close an element
+  characterScope: ['scope', (context, data) => data.payload.startsWith("span") && ["bd", "bk", "dc", "em", "fk", "ft", "fq", "fqa", "fr", "fv", "ior", "it", "k", "nd", "ord", "pn", "qs", "sls", "tl", "wj", "xt"].includes(data.payload.split("/")[1]), (renderer, context, data) => {
+    if (data.subType === "start") {
+      renderer.pushStackRow();
+    } else {
+      const spanContent = renderer.topStackRow().join("");
+      renderer.popStackRow();
+      renderer.topStackRow().push(`<span class="${data.payload.split("/")[1]}">${spanContent}</span>`);
+    }
+  }],
+  // ignore w
+  w: ['scope', (context, data) => data.payload.split("/")[1] === 'w', () => {}],
+  startBlock: ['startBlock', () => true, renderer => renderer.pushStackRow()],
+  unhandledScope: ['scope', (context, data) => data.payload.startsWith("span"), (renderer, context, data) => {
+    if (data.subType === "start") {
+      renderer.docSetModel.writeLogEntry('Warning', `Unhandled span '${data.payload}'`, renderer.key);
+    }
+  }],
+  token: ['token', () => true, (renderer, context, data) => {
+    let tokenString;
+    if (["lineSpace", "eol"].includes(data.subType)) {
+      tokenString = " ";
+    } else {
+      if ([";", "!", "?"].includes(data.payload)) {
+        if (renderer.topStackRow().length > 0) {
+          let lastPushed = renderer.topStackRow().pop();
+          lastPushed = lastPushed.replace(/ $/, "&#8239;");
+          renderer.appendToTopStackRow(lastPushed);
+        }
+        tokenString = data.payload;
+      } else if ([":", "»"].includes(data.payload)) {
+        if (renderer.topStackRow().length > 0) {
+          let lastPushed = renderer.topStackRow().pop();
+          lastPushed = lastPushed.replace(/ $/, "&#160;");
+          renderer.appendToTopStackRow(lastPushed);
+        }
+        tokenString = data.payload;
+      } else {
+        tokenString = data.payload.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+    }
+    return renderer.appendToTopStackRow(tokenString);
+  }]
+});
+
+/***/ }),
+
+/***/ "./src/comps/render_config.json":
+/*!**************************************!*\
+  !*** ./src/comps/render_config.json ***!
+  \**************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"title":"Title ULB","language":"en","textDirection":"ltr","uid":"ULB","bookSources":["BOOK_SLUG_HERE"],"bookOutput":{},"peripheralSources":[],"structure":[["section","nt",[]]],"i18n":{"notes":"Notes","tocBooks":"Books of the Bible","titlePage":"TEST RENDER OUTPUT","copyright":"Licensed under a Creative Commons Attribution-Sharealike 4.0 International License","coverAlt":"Cover","preface":"Preface","ot":"Old Testament","nt":"New Testament"}}');
+
 /***/ })
 
 /******/ 	});
@@ -73205,7 +74466,7 @@ module.exports = function availableTypedArrays() {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("16aa0985c2b635005eab")
+/******/ 		__webpack_require__.h = () => ("b488cd0d47882982814e")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
