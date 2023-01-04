@@ -158,7 +158,7 @@ class Playground extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
     };
   }
   setupPoskomma(data) {
-    const mutationQuery = `mutation { addDocument(` + `selectors: [{key: "lang", value: "eng"}, {key: "abbr", value: "ust"}], ` + `contentType: "usfm", ` + `content: """${data}""") }`;
+    const mutationQuery = `mutation { addDocument(` + `selectors: [{key: "lang", value: "eng"}, {key: "abbr", value: "ust"}], ` + `contentType: "usx", ` + `content: """${data}""") }`;
     this.queryPk(mutationQuery);
   }
   fileInput(event) {
